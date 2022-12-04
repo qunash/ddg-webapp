@@ -26,4 +26,7 @@ def search():
     max_results = request.args.get('max_results', 3, type=int)
 
     results = ddg(q, region=region, safesearch=safesearch, time=time, max_results=max_results)
-    return jsonify(results)
+    
+    response = jsonify(results)
+    response.headers['Access-Control-Allow-Origin'] = 'https://chat.openai.com' # This is necessary to allow requests from the chrome extension on https://chat.openai.com
+    return response
