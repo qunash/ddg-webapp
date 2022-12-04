@@ -23,7 +23,7 @@ def search():
     region = request.args.get('region', 'wt-wt')
     safesearch = request.args.get('safesearch', 'Off')
     time = request.args.get('time', None)
-    max_results = request.args.get('max_results', 3)
+    max_results = request.args.get('max_results', 3, type=int)
 
     results = ddg(q, region=region, safesearch=safesearch, time=time, max_results=max_results)
     return jsonify(results)
