@@ -16,12 +16,14 @@ def about():
 
 @app.route('/search')
 def search():
-    keywords = request.args.get('keywords')
+    q = request.args.get('q')
     region = request.args.get('region', 'wt-wt')
     safesearch = request.args.get('safesearch', 'Off')
     time = request.args.get('time', None)
-    max_results = request.args.get('max_results', None)
+    max_results = request.args.get('max_results', 3)
 
-    results = ddg(keywords, region=region, safesearch=safesearch, time=time, max_results=max_results)
-
-    return jsonify(results)
+    if q:
+        results = ddg(q, region=region, safesearch=safesearch, time=time, max_results=max_results, output=json)
+        return results
+    else:
+        return 'Please provide a search query.'
