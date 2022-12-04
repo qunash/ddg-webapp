@@ -23,7 +23,7 @@ def search():
     max_results = request.args.get('max_results', 3)
 
     if q:
-        results = ddg(q, region=region, safesearch=safesearch, time=time, max_results=max_results, output=json)
+        results = ddg(q, region=region, safesearch=safesearch, time=time, max_results=max_results, output='json')
         return results
     else:
         return 'Please provide a search query.'
