@@ -1,4 +1,7 @@
 from flask import Flask
+import requests
+from duckduckgo_search import ddg
+
 
 app = Flask(__name__)
 
