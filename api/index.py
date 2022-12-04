@@ -1,5 +1,5 @@
 from flask import Flask
-import requests
+from flask import request
 from duckduckgo_search import ddg
 
 
