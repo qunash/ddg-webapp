@@ -18,7 +18,11 @@ def about():
 def search():
     q = request.args.get('q')
     if not q:
-        response = jsonify({'error': 'Please provide a search query.'})
+        response = jsonify([{
+            'body': 'Please provide a search query.',
+            'href': '',
+            'title': ''
+        }])
         response.headers['Access-Control-Allow-Origin'] = 'https://chat.openai.com'
         return response
 
