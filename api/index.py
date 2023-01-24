@@ -30,6 +30,7 @@ def search():
     safesearch = request.args.get('safesearch', 'Off')
     time = request.args.get('time', None)
     max_results = request.args.get('max_results', 3, type=int)
+    max_results = min(max_results, 10)
 
     results = ddg(q, region=region, safesearch=safesearch, time=time, max_results=max_results)
 
