@@ -17,6 +17,10 @@ def about():
 
 @app.route('/search')
 def search():
+
+    if not request.referrer or not request.referrer.startswith('https://chat.openai.com'):
+        return 'Access Denied', 403
+
     q = request.args.get('q')
     if not q:
         return error_response('Please provide a query.')
