@@ -44,6 +44,10 @@ def search():
 
 @app.route('/url_to_text')
 def url_to_text():
+    
+    if not request.referrer or not request.referrer.startswith('https://chat.openai.com'):
+        return 'Access Denied', 403
+
     url = request.args.get('url')
     if not url:
         return error_response('Please provide a URL.')
