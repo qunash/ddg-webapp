@@ -80,6 +80,9 @@ def error_response(message):
 
 def extract_title_and_text_from_url(url: str):
 
+    if not url.startswith('http://') and not url.startswith('https://'):
+        url = 'https://' + url
+        
     article = Article(url)
     article.download()
     article.parse()
