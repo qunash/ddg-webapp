@@ -51,6 +51,9 @@ def url_to_text():
     url = request.args.get('url')
     if not url:
         return error_response('Please provide a URL.')
+
+    if '.' not in url:
+        return error_response('Invalid URL.')
         
     try:
         title, text = extract_title_and_text_from_url(url)
@@ -82,7 +85,7 @@ def extract_title_and_text_from_url(url: str):
 
     if not url.startswith('http://') and not url.startswith('https://'):
         url = 'https://' + url
-        
+
     article = Article(url)
     article.download()
     article.parse()
