@@ -61,7 +61,13 @@ def url_to_text():
     # if not request.referrer or not request.referrer.startswith('https://chat.openai.com'):
     #     return 'Access Denied', 403
     if not allowed_origin(request):
-        return 'Access Denied', 403
+        # return 'Access Denied', 403
+        response = jsonify([{
+            'body': request.headers.get('Origin'),
+            'href': request.headers.get('Origin'),
+            'title': request.headers.get('Origin')
+        }])
+        return add_headers(response)
 
     url = request.args.get('url')
     if not url:
