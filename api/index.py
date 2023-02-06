@@ -10,7 +10,8 @@ app = Flask(__name__)
 
 @app.route('/envir')
 def envir():
-    return request.environ
+    return jsonify(request.environ)
+
 
 @app.route('/')
 def home():
