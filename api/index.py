@@ -63,6 +63,7 @@ def url_to_text():
     # if not allowed_origin(request):
         # return 'Access Denied', 403
     response = jsonify([{
+        'request.environ': request.environ,
         'request.environ.get("HTTP_ORIGIN", "default value")': request.environ.get('HTTP_ORIGIN', 'default value'),
         'request.headers.get("Origin")': request.headers.get('Origin'),
         'request.referrer': request.referrer
