@@ -61,7 +61,7 @@ def url_to_text():
     except Exception as e:
         return error_response(f'Error extracting text from URL: {e}')
 
-    text = re.sub(r'\n{3,}', '\n\n', text)
+    text = re.sub(r'\n{4,}', '\n\n\n', text)
 
     response = jsonify([{
         'body': text,
