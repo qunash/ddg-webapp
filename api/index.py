@@ -16,11 +16,18 @@ def home():
 def about():
     return 'About'
 
+
+def allowed_origin(request):
+    origin = request.headers.get('Origin')
+    return origin and origin.startswith('https://chat.openai.com')
+
 @app.route('/search')
 def search():
 
     if not request.referrer or not request.referrer.startswith('https://chat.openai.com'):
         return 'Access Denied', 403
+    # if not allowed_origin(request):
+    #     return 'Access Denied', 403
 
     q = request.args.get('q')
     if not q:
@@ -51,7 +58,9 @@ def escape_ddg_bangs(q):
 @app.route('/url_to_text')
 def url_to_text():
     
-    if not request.referrer or not request.referrer.startswith('https://chat.openai.com'):
+    # if not request.referrer or not request.referrer.startswith('https://chat.openai.com'):
+    #     return 'Access Denied', 403
+    if not allowed_origin(request):
         return 'Access Denied', 403
 
     url = request.args.get('url')
