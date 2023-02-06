@@ -4,6 +4,7 @@ from flask import request
 from flask import jsonify
 from duckduckgo_search import ddg
 from newspaper import Article
+import urllib.parse
 
 
 app = Flask(__name__)
@@ -27,6 +28,7 @@ def search():
         return error_response('Please provide a query.')
 
     try:
+        q = urllib.parse.quote(q) # URL encode
         region = request.args.get('region', 'wt-wt')
         safesearch = request.args.get('safesearch', 'Off')
         time = request.args.get('time', None)
