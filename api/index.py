@@ -1,3 +1,4 @@
+import re
 from flask import Flask
 from flask import request
 from flask import jsonify
@@ -59,6 +60,8 @@ def url_to_text():
         title, text = extract_title_and_text_from_url(url)
     except Exception as e:
         return error_response(f'Error extracting text from URL: {e}')
+
+    text = re.sub(r'\n{3,}', '\n\n', text)
 
     response = jsonify([{
         'body': text,
