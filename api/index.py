@@ -4,14 +4,13 @@ from flask import request
 from flask import jsonify
 from duckduckgo_search import ddg
 from newspaper import Article
-import urllib.parse
 
 
 app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return 'Hello, World!'
+    return 'Wow, it works!'
 
 @app.route('/about')
 def about():
@@ -28,7 +27,7 @@ def search():
         return error_response('Please provide a query.')
 
     try:
-        q = urllib.parse.quote(q) # URL encode
+        q = escape_ddg_bangs(q)
         region = request.args.get('region', 'wt-wt')
         safesearch = request.args.get('safesearch', 'Off')
         time = request.args.get('time', None)
@@ -43,7 +42,11 @@ def search():
 
     except Exception as e:
         return error_response(f'Error searching: {e}')
-    
+
+def escape_ddg_bangs(q):
+    q = re.sub(r'^!', r'', q)
+    q = re.sub(r'\s!', r' ', q)
+    return q
 
 @app.route('/url_to_text')
 def url_to_text():
