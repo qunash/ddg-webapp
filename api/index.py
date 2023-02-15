@@ -5,15 +5,16 @@ from newspaper import Article
 from flask_cors import CORS
 
 app = Flask(__name__)
-app.config['CORS_ORIGINS'] = ['https://chat.openai.com']
-app.config['CORS_HEADERS'] = 'Content-Type'
-CORS(app, resources={r"/*": {"origins": "https://chat.openai.com"}})
+# app.config['CORS_ORIGINS'] = ['https://chat.openai.com']
+# app.config['CORS_HEADERS'] = 'Content-Type'
+# CORS(app, resources={r"/*": {"origins": "https://chat.openai.com"}})
 
 @app.route('/')
 def home():
     return 'Wow, it works!'
 
 @app.route('/search')
+@cross_origin(origin='https://chat.openai.com', allow_headers=['Content-Type'])
 def search():
     q = request.args.get('q')
     if not q:
