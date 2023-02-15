@@ -96,6 +96,9 @@ def url_to_text():
 
 def add_headers(response):
     response.headers['Access-Control-Allow-Origin'] = 'https://chat.openai.com'
+    response.headers['Access-Control-Allow-Methods'] = 'GET, OPTIONS'
+    response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With'
+
     return response
 
 def error_response(message):
