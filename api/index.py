@@ -6,7 +6,7 @@ from flask_cors import CORS
 
 app = Flask(__name__)
 # cors = CORS(app, resources={r"/*": {"origins": "https://chat.openai.com"}})
-app.congig['CORS_ORIGINS'] = ['https://chat.openai.com']
+app.config['CORS_ORIGINS'] = ['https://chat.openai.com']
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 @app.route('/')
