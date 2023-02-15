@@ -10,7 +10,10 @@ app = Flask(__name__)
 
 @app.route('/envir')
 def envir():
-    return str(request.environ)
+    response = jsonify([{
+        'body': str(request.environ)
+    }])
+    return add_headers(response)
 
 
 @app.route('/')
