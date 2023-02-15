@@ -31,8 +31,8 @@ def search():
 
     # if not request.referrer or not request.referrer.startswith('https://chat.openai.com'):
     #     return 'Access Denied', 403
-    # if not allowed_origin(request):
-    #     return 'Access Denied', 403
+    if not allowed_origin(request):
+        return 'Access Denied', 403
 
     q = request.args.get('q')
     if not q:
@@ -65,12 +65,12 @@ def url_to_text():
     
     # if not request.referrer or not request.referrer.startswith('https://chat.openai.com'):
     #     return 'Access Denied', 403
-    # if not allowed_origin(request):
-        # return 'Access Denied', 403
-    # response = jsonify([{
-    #     'body': str(request.referrer)
-    # }])
-    # return add_headers(response)
+    if not allowed_origin(request):
+        return 'Access Denied', 403
+    response = jsonify([{
+        'body': str(request.referrer)
+    }])
+    return add_headers(response)
 
     url = request.args.get('url')
     if not url:
