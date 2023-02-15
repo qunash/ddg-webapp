@@ -8,6 +8,11 @@ from newspaper import Article
 
 app = Flask(__name__)
 
+@app.route('/envir')
+def envir():
+    return str(request.environ)
+
+
 @app.route('/')
 def home():
     return 'Wow, it works!'
