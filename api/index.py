@@ -5,9 +5,9 @@ from newspaper import Article
 from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
-# app.config['CORS_ORIGINS'] = ['https://chat.openai.com']
-# app.config['CORS_HEADERS'] = 'Content-Type'
-# CORS(app, resources={r"/*": {"origins": "https://chat.openai.com"}})
+app.config['CORS_ORIGINS'] = ['https://chat.openai.com']
+app.config['CORS_HEADERS'] = 'Content-Type'
+CORS(app, resources={r"/*": {"origins": "https://chat.openai.com"}})
 
 @app.route('/')
 def home():
