@@ -14,7 +14,7 @@ def home():
     return 'Wow, it works!'
 
 @app.route('/search')
-@cross_origin(origin='https://chat.openai.com', allow_headers=['Content-Type'])
+# @cross_origin(origin='https://chat.openai.com', allow_headers=['Content-Type'])
 def search():
     q = request.args.get('q')
     if not q:
