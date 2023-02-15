@@ -16,7 +16,8 @@ def search():
 
     # deny access to the API from non-OpenAI domain https://chat.openai.com
     if request.headers.get('Origin') != 'https://chat.openai.com':
-        return 'Access denied.', 403
+        # return 'Access denied.', 403
+        return error_response('Access denied.')
 
     q = request.args.get('q')
     if not q:
