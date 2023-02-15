@@ -2,7 +2,7 @@ import re
 from flask import Flask, request, jsonify
 from duckduckgo_search import ddg
 from newspaper import Article
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
 # app.config['CORS_ORIGINS'] = ['https://chat.openai.com']
