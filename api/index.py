@@ -13,6 +13,11 @@ def home():
 
 @app.route('/search')
 def search():
+
+    # deny access to the API from non-OpenAI domain https://chat.openai.com
+    if request.headers.get('Origin') != 'https://chat.openai.com':
+        return 'Access denied.', 403
+
     q = request.args.get('q')
     if not q:
         return error_response('Please provide a query.')
