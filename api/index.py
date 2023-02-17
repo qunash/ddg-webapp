@@ -24,6 +24,7 @@ def search():
         return error_response('Please provide a query.')
 
     try:
+        q = q[:500]
         q = escape_ddg_bangs(q)
         region = request.args.get('region', 'wt-wt')
         safesearch = request.args.get('safesearch', 'Off')
