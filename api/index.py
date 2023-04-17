@@ -1,10 +1,10 @@
 import re
-from flask import Flask, request, jsonify, Response
+#from flask import Flask, request, jsonify, Response
 from duckduckgo_search import ddg
 from newspaper import Article
 from flask_cors import CORS
 
-app = Flask(__name__)
+#app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "https://chat.openai.com"}})
 
 @app.route('/')
