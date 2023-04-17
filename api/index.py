@@ -1,5 +1,5 @@
 import re
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, Response
 from duckduckgo_search import ddg
 from newspaper import Article
 from flask_cors import CORS
@@ -13,11 +13,9 @@ def home():
 
 @app.route('/search')
 def search():
-
-    # deny access to the API from non-OpenAI domains.
-    # if request.headers.get('Origin').startswith('https://chat.openai.com'):
-    # if not request.referrer or not request.referrer.startswith('https://chat.openai.com'):
-    #     return 'Access denied.', 403
+    user_agent = request.headers.get('User-Agent', '').lower()
+    if 'axios' in user_agent:
+        return jsonify({})
 
     q = request.args.get('q')
     if not q:
@@ -46,6 +44,10 @@ def escape_ddg_bangs(q):
 
 @app.route('/url_to_text')
 def url_to_text():
+    user_agent = request.headers.get('User-Agent', '').lower()
+    if 'axios' in user_agent:
+        return jsonify({})
+
     url = request.args.get('url')
     if not url:
         return error_response('Please provide a URL.')
@@ -86,3 +88,7 @@ def extract_title_and_text_from_url(url: str):
     article.parse()
 
     return article.title, article.text
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
